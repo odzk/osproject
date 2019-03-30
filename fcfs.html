@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>First Come First Serve Algorithm</title>
+  </head>
+  <body>
+<script type="text/javascript">
+// Seting up Processes and Variables to use
+var p1 = { burst_time :  21, arrival_time : 0 };
+var p2 = { burst_time :  3, arrival_time : p1.burst_time };
+var p3 = { burst_time :  6, arrival_time : p2.arrival_time + p2.burst_time };
+var p4 = { burst_time :  2, arrival_time : p3.arrival_time + p3.burst_time };
+
+var ave_waiting_time = (p1.arrival_time + p2.arrival_time + p3.arrival_time + p4.arrival_time) / 4;
+
+console.log(ave_waiting_time);
+
+</script>
+
+  </body>
+</html>
