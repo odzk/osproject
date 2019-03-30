@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>First Come First Serve Algorithm</title>
+  </head>
+  <body>
+
+<div class="container-fluid col-sm-6">
+
+  <div class="card mt-3 shadow">
+  <div class="card-header">
+    Input Process Time <button class="btn btn-sm btn-info float-right">About</button>
+   </div>
+
+<div class="card-body">
+<table class="table table-sm table-bordered table-hover">
+
+<tr class="d-flex text-center">
+  <td class="col-6 text-center">(P1) Burst Time:</td>
+  <td class="col-4"><input type='text' class='form-control form-control-sm' id="p1" value="21"></td>
+  <td class="col-2">sec</td>
+
+</tr>
+
+<tr class="d-flex text-center">
+  <td class="col-6 text-center">(P2) Burst Time:</td>
+  <td class="col-4"><input type='text' class='form-control form-control-sm' id="p2" value="3"></td>
+  <td class="col-2">sec</td>
+</tr>
+
+<tr class="d-flex text-center">
+  <td class="col-6 text-center">(P3) Burst Time:</td>
+  <td class="col-4"><input type='text' class='form-control form-control-sm' id="p3" value="6"></td>
+  <td class="col-2">sec</td>
+
+</tr>
+
+<tr class="d-flex text-center">
+  <td class="col-6 text-center">(P4) Burst Time:</td>
+  <td class="col-4"><input type='text' class='form-control form-control-sm' id="p4" value="2"></td>
+  <td class="col-2">sec</td>
+</tr>
+
+</table>
+
+<div class="col-md-12 text-center">
+  <button class="btn btn-info btn-sm" onclick="FCFS()">FCFS Algorithm</button>
+  <button class="btn btn-success btn-sm" onclick="SPF()">SPF Algorithm</button>
+  <button class="btn btn-danger btn-sm">SRTF Algorithm</button>
+  <button class="btn btn-primary btn-sm">RR Algorithm</button>
+</div>
+
+</div>
+</div>
+
+  <div class="card mt-4 shadow">
+  <div class="card-header">
+    Output Executing: <span id="totalWatingTime"></span>
+   </div>
+  <div class="card-body">
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%; display: none;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" id="p1Progress"><span id="firstProcess"></span></div>
+    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%; display: none;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" id="p2Progress"><span id="secondProcess"></span></div>
+    <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%; display: none;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" id="p3Progress"><span id="thirdProcess"></span></div>
+    <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%; display: none;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" id="p4Progress"><span id="fourthProcess"></span></div>
+</div>
+  </div>
+</div>
+</div><!-- end of container -->
+  </body>  
+
+<script type="text/javascript">
+
+//Get the Values from Input
+
+//First Come First Serve Algorithm
+function FCFS() {
+
+var p1BurstTime = $('#p1').val();
+var p2BurstTime = $('#p2').val();
+var p3BurstTime = $('#p3').val();
+var p4BurstTime = $('#p4').val();
+
+$('#firstProcess').text('P1');
+$('#secondProcess').text('P2');
+$('#thirdProcess').text('P3');
+$('#fourthProcess').text('P4');
+
+var getTotalBurstTime = (Number(p1BurstTime) + Number(p2BurstTime) + Number(p3BurstTime) + Number(p4BurstTime));
+var firstBar = (Number(p1BurstTime) / Number(getTotalBurstTime) * 100);
+var secondBar = (Number(p2BurstTime) / Number(getTotalBurstTime) * 100);
+var thirdBar = (Number(p3BurstTime) / Number(getTotalBurstTime) * 100);
+var fourthBar = (Number(p4BurstTime) / Number(getTotalBurstTime) * 100);
+
+
+for (var i = 0; i <= firstBar; i++) {
+  $('#p1Progress').attr('aria-valuenow', i).css( {'width' : i + '%', 'display' : 'block' } );
+} 
+
+
+for (var i = 0; i <= secondBar; i++) {
+  $('#p2Progress').attr('aria-valuenow', i).css( { 'width' : i + '%', 'display' : 'block' } );
+} 
+
+
+for (var i = 0; i <= thirdBar; i++) {
+  $('#p3Progress').attr('aria-valuenow', i).css( { 'width' : i + '%', 'display' : 'block' } );
+}
+
+for (var i = 0; i <= fourthBar; i++) {
+$('#p4Progress').attr('aria-valuenow', i).css( {'width' : i + '%', 'display' : 'block' } );
+}
+
+
+
+var p1 = { burst_time :  Number(p1BurstTime), arrival_time : 0 };
+var p2 = { burst_time :  Number(p2BurstTime), arrival_time : p1.burst_time };
+var p3 = { burst_time :  Number(p3BurstTime), arrival_time : p2.arrival_time + p2.burst_time };
+var p4 = { burst_time :  Number(p4BurstTime), arrival_time : p3.arrival_time + p3.burst_time };
+
+var ave_waiting_time = ((p1.arrival_time + p2.arrival_time + p3.arrival_time + p4.arrival_time) / 4);
+
+console.log(ave_waiting_time);
+$('#totalWatingTime').text(ave_waiting_time + ' ms');
+
+}
+
+// Shortest Path Algorithm
+
+function SPF() {
+
+//get all values and put into array
+
+var p1BurstTime = $('#p1').val();
+var p2BurstTime = $('#p2').val();
+var p3BurstTime = $('#p3').val();
+var p4BurstTime = $('#p4').val();
+
+for (var i = 0; i <= firstBar; i++) {
+  $('#p1Progress').attr('aria-valuenow', i).css( {'width' : i + '%', 'display' : 'block' } );
+} 
+
+
+for (var i = 0; i <= secondBar; i++) {
+  $('#p2Progress').attr('aria-valuenow', i).css( { 'width' : i + '%', 'display' : 'block' } );
+} 
+
+
+for (var i = 0; i <= thirdBar; i++) {
+  $('#p3Progress').attr('aria-valuenow', i).css( { 'width' : i + '%', 'display' : 'block' } );
+}
+
+for (var i = 0; i <= fourthBar; i++) {
+$('#p4Progress').attr('aria-valuenow', i).css( {'width' : i + '%', 'display' : 'block' } );
+}
+
+allValues = new Array();
+
+var allValues = [p1BurstTime, p2BurstTime, p3BurstTime, p4BurstTime];
+var sortValues = allValues.sort((function (a, b) {  return a - b;  }));
+var firstValue = sortValues[0];
+var secondValue = sortValues[1];
+var thirdValue = sortValues[2];
+var fourthValue = sortValues[3];
+
+//compare the values in Process
+
+//solve for arrival time:
+firstArrivalTime = 0;
+secondArrivalTime = 0;
+thirdArrivalTime = 0;
+fourthArrivalTime = 0;
+
+if (firstValue == p1BurstTime) {
+  $('#firstProcess').text('P1');
+  var firstArrivalTime = 0;
+} else if (firstValue == p2BurstTime) {
+  $('#firstProcess').text('P2');
+  var firstArrivalTime = 0;
+} else if (firstValue == p3BurstTime) {
+  $('#firstProcess').text('P3');
+  var firstArrivalTime = 0;
+} else {
+  $('#firstProcess').text('P4');
+  var firstArrivalTime = 0;
+}
+
+if (secondValue == p1BurstTime) {
+  $('#secondProcess').text('P1');
+  secondArrivalTime = firstArrivalTime + Number(firstValue);
+} else if (secondValue == p2BurstTime) {
+  $('#secondProcess').text('P2');
+  secondArrivalTime = firstArrivalTime + Number(firstValue);
+} else if (secondValue == p3BurstTime) {
+  $('#secondProcess').text('P3');
+  secondArrivalTime = firstArrivalTime + Number(firstValue);
+} else {
+  $('#secondProcess').text('P4');
+  secondArrivalTime = firstArrivalTime + Number(firstValue);
+}
+
+
+if (thirdValue == p1BurstTime) {
+  $('#thirdProcess').text('P1');
+  thirdArrivalTime = secondArrivalTime + Number(secondValue);
+} else if (thirdValue == p2BurstTime) {
+  $('#thirdProcess').text('P2');
+  thirdArrivalTime = secondArrivalTime + Number(secondValue);
+} else if (thirdValue == p3BurstTime) {
+  $('#thirdProcess').text('P3');
+  thirdArrivalTime = secondArrivalTime + Number(secondValue);
+} else {
+  $('#thirdProcess').text('P4');
+  thirdArrivalTime = secondArrivalTime + Number(secondValue);
+}
+
+
+if (fourthValue == p1BurstTime) {
+  $('#fourthProcess').text('P1');
+  fourthArrivalTime = thirdArrivalTime + Number(thirdValue);
+} else if (fourthValue == p2BurstTime) {
+  $('#fourthProcess').text('P2');
+  fourthArrivalTime = thirdArrivalTime + Number(thirdValue);
+} else if (fourthValue == p3BurstTime) {
+  $('#fourthProcess').text('P3');
+  fourthArrivalTime = thirdArrivalTime + Number(thirdValue);
+} else {
+  $('#fourthProcess').text('P4');
+  fourthArrivalTime = thirdArrivalTime + Number(thirdValue);
+}
+
+var getTotalBurstTime = Number(firstValue) + Number(secondValue) + Number(thirdValue) + Number(fourthValue);
+var firstBar = (Number(firstValue) / Number(getTotalBurstTime) * 100);
+var secondBar = (Number(secondValue) / Number(getTotalBurstTime) * 100);
+var thirdBar = (Number(thirdValue) / Number(getTotalBurstTime) * 100);
+var fourthBar = (Number(fourthValue) / Number(getTotalBurstTime) * 100);
+
+for (var i = 0; i <= firstBar; i++) {
+  $('#p1Progress').attr('aria-valuenow', i).css( {'width' : i + '%', 'display' : 'block' } );
+} 
+
+
+for (var i = 0; i <= secondBar; i++) {
+  $('#p2Progress').attr('aria-valuenow', i).css( { 'width' : i + '%', 'display' : 'block' } );
+} 
+
+
+for (var i = 0; i <= thirdBar; i++) {
+  $('#p3Progress').attr('aria-valuenow', i).css( { 'width' : i + '%', 'display' : 'block' } );
+}
+
+for (var i = 0; i <= fourthBar; i++) {
+$('#p4Progress').attr('aria-valuenow', i).css( {'width' : i + '%', 'display' : 'block' } );
+}
+
+console.log(firstArrivalTime);
+console.log(secondArrivalTime);
+console.log(thirdArrivalTime);
+console.log(fourthArrivalTime);
+var ave_waiting_time = (firstArrivalTime + secondArrivalTime + thirdArrivalTime + fourthArrivalTime) / 4;
+
+$('#totalWatingTime').text(ave_waiting_time + ' ms');
+
+}
+
+</script>
+
+</html>
