@@ -12,15 +12,33 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <title>First Come First Serve Algorithm</title>
+    <title>Sample Algorithms</title>
   </head>
   <body>
 
-<div class="container-fluid col-sm-6">
+<div class="container-fluid mt-5">
+<div class="row">
+<div class="col-sm-4 mt-5">
+<div class="col-md-12 text-center mt-3 shadow p-3">
+  <a href="index.html" class="btn btn-info btn-sm">FCFS Algorithm</a>
+  <a href="index.html" class="btn btn-success btn-sm">SPF Algorithm</a>
+</div>
 
+<div class="col-md-12 text-center mt-3 shadow p-3">
+  <a href="srtf.html" class="btn btn-danger btn-sm">SRTF Algorithm</a>
+  <a href="rr.html" class="btn btn-primary btn-sm">RR Algorithm</a>
+</div>
+
+<div class="col-md-12 text-center mt-3 shadow p-3">
+  <button class="btn btn-secondary btn-sm">Priority Scheduling Algorithm</button>
+</div>
+
+</div>
+
+<div class="col-sm-6">
   <div class="card mt-3 shadow">
   <div class="card-header">
-    Input Process Time <button class="btn btn-sm btn-info float-right" data-toggle="modal" data-target="#about">About</button>
+    FCFS/SPF Input Process Time <button class="btn btn-sm btn-info float-right" data-toggle="modal" data-target="#about">About</button>
    </div>
 
 <div class="card-body">
@@ -30,9 +48,7 @@
   <td class="col-6 text-center">(P1) Burst Time:</td>
   <td class="col-4"><input type='text' class='form-control form-control-sm' id="p1" value="21"></td>
   <td class="col-2">sec</td>
-
 </tr>
-
 <tr class="d-flex text-center">
   <td class="col-6 text-center">(P2) Burst Time:</td>
   <td class="col-4"><input type='text' class='form-control form-control-sm' id="p2" value="3"></td>
@@ -57,11 +73,8 @@
 <div class="col-md-12 text-center">
   <button class="btn btn-info btn-sm" onclick="FCFS()">FCFS Algorithm</button>
   <button class="btn btn-success btn-sm" onclick="SPF()">SPF Algorithm</button>
-  <button class="btn btn-danger btn-sm">SRTF Algorithm</button>
-  <button class="btn btn-primary btn-sm">RR Algorithm</button>
 </div>
 
-</div>
 </div>
 
   <div class="card mt-4 shadow">
@@ -78,6 +91,7 @@
   </div>
 </div>
 </div><!-- end of container -->
+</div>  
   </body>  
 
 <!-- Modal -->
@@ -91,7 +105,7 @@
         </button>
       </div>
       <div class="modal-body text-center">
-      <p>OS Project Algorithm Sample</p>
+      <p>OS Project Algorithm Sample v0.9</p>
       <p>Submitted by: Odysseus Ambut</p>
       <p>Submiited to: Godwin Monserate</p>
       <p>Github: https://github.com/odzk/</p>
