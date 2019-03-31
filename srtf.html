@@ -184,44 +184,43 @@ var secondBar = (Number(p2BurstTime) / Number(allBurstTime) * 100);
 var thirdBar = (Number(p3BurstTime) / Number(allBurstTime) * 100);
 var fourthBar = (Number(p4BurstTime) / Number(allBurstTime) * 100);
 
-console.log(allBurstTime);
 
 var i = 1;
 while(i <= allProcessObj.p2.arrival_time) {
-    $('#firstProcess').text('P1');
+    $('#firstProcess').text('P1 - 1 ms' );
     $('#p1Progress').attr('aria-valuenow', ((p2ArrivalTime / allBurstTime)*100)).css( {'width' : ((p2ArrivalTime / allBurstTime)*100) + '%', 'display' : 'block' } );
     p1BurstTime = p1BurstTime - i;
     i++;
 }
 
 while (i <= allProcessObj.p3.arrival_time) {
-      $('#secondProcess').text('P2');
+      $('#secondProcess').text('P2 - 1 ms');
       $('#p2Progress').attr('aria-valuenow', (((p3ArrivalTime - p2ArrivalTime) / allBurstTime)*100)).css( {'width' : (((p3ArrivalTime - p2ArrivalTime) / allBurstTime)*100) + '%', 'display' : 'block' } );
     p2BurstTime = p2BurstTime - p2ArrivalTime;  
     i++;
 }
 
 while (i <= allProcessObj.p4.arrival_time) {
-      $('#thirdProcess').text('P3');
+      $('#thirdProcess').text('P3 - 1 ms');
       $('#p3Progress').attr('aria-valuenow', (((p4ArrivalTime - p3ArrivalTime) / allBurstTime)*100)).css( {'width' : (((p4ArrivalTime - p3ArrivalTime) / allBurstTime)*100) + '%', 'display' : 'block' } );
       p3BurstTime = p3BurstTime - (p3ArrivalTime - p2ArrivalTime);
       i++;
     }
 
-      $('#fourthProcess').text('P4');
+      $('#fourthProcess').text('P4 - 2 ms');
       $('#p4Progress').attr('aria-valuenow', fourthBar).css( {'width' : fourthBar + '%', 'display' : 'block' } );
       p4BurstTime = p3BurstTime - (p4ArrivalTime - p3ArrivalTime);
 
 
-    $('#remaining1').text('P2');
+    $('#remaining1').text('P2 - 2 ms');
       $('#remaining1').attr('aria-valuenow', ((2/allBurstTime)*100)).css( {'width' : ((2/allBurstTime)*100) + '%', 'display' : 'block' } );
       p4BurstTime = p3BurstTime - (p4ArrivalTime - p3ArrivalTime);
 
-    $('#remaining2').text('P3');
+    $('#remaining2').text('P3 - 5 ms');
       $('#remaining2').attr('aria-valuenow', ((5/allBurstTime)*100)).css( {'width' : ((5/allBurstTime)*100) + '%', 'display' : 'block' } );
       p4BurstTime = p3BurstTime - (p4ArrivalTime - p3ArrivalTime);
 
-    $('#remaining3').text('P4');
+    $('#remaining3').text('P4 - 20ms');
       $('#remaining3').attr('aria-valuenow', ((20/allBurstTime)*100)).css( {'width' : ((20/allBurstTime)*100) + '%', 'display' : 'block' } );
       p4BurstTime = p3BurstTime - (p4ArrivalTime - p3ArrivalTime);
 
@@ -318,7 +317,7 @@ var p2 = { burst_time :  Number(p2BurstTime), arrival_time : p1.burst_time };
 var p3 = { burst_time :  Number(p3BurstTime), arrival_time : p2.arrival_time + p2.burst_time };
 var p4 = { burst_time :  Number(p4BurstTime), arrival_time : p3.arrival_time + p3.burst_time };
 
-var ave_waiting_time = ((p1.arrival_time + p2.arrival_time + p3.arrival_time + p4.arrival_time) / 4);
+var ave_waiting_time = ( (((Number(allProcessObj.p4.arrival_time) + Number(allProcessObj.p3.arrival_time)) - 1)) + ((Number(allProcessObj.p4.arrival_time) + Number(allProcessObj.p3.arrival_time) + Number(allProcessObj.p4.burst_time)) - 1) + ((Number(allProcessObj.p2.arrival_time) + Number(allProcessObj.p3.arrival_time) + Number(allProcessObj.p4.arrival_time) + Number(allProcessObj.p3.burst_time)) - 1 ) / 4);
 
 $('#totalWatingTime').text(ave_waiting_time + ' ms');
 

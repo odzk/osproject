@@ -129,10 +129,10 @@ var p2BurstTime = $('#p2').val();
 var p3BurstTime = $('#p3').val();
 var p4BurstTime = $('#p4').val();
 
-$('#firstProcess').text('P1');
-$('#secondProcess').text('P2');
-$('#thirdProcess').text('P3');
-$('#fourthProcess').text('P4');
+$('#firstProcess').text('P1 - ' + p1BurstTime + ' ms');
+$('#secondProcess').text('P2 - ' + p2BurstTime + ' ms');
+$('#thirdProcess').text('P3 - ' + p3BurstTime + ' ms');
+$('#fourthProcess').text('P4 - ' + p4BurstTime + ' ms');
 
 var getTotalBurstTime = (Number(p1BurstTime) + Number(p2BurstTime) + Number(p3BurstTime) + Number(p4BurstTime));
 var firstBar = (Number(p1BurstTime) / Number(getTotalBurstTime) * 100);
@@ -220,60 +220,60 @@ thirdArrivalTime = 0;
 fourthArrivalTime = 0;
 
 if (firstValue == p1BurstTime) {
-  $('#firstProcess').text('P1');
+  $('#firstProcess').text('P1 - ' + firstValue + ' ms');
   var firstArrivalTime = 0;
 } else if (firstValue == p2BurstTime) {
-  $('#firstProcess').text('P2');
+  $('#firstProcess').text('P2 - ' + firstValue + ' ms');
   var firstArrivalTime = 0;
 } else if (firstValue == p3BurstTime) {
-  $('#firstProcess').text('P3');
+  $('#firstProcess').text('P3 - ' + firstValue + ' ms');
   var firstArrivalTime = 0;
 } else {
-  $('#firstProcess').text('P4');
+  $('#firstProcess').text('P4 - ' + firstValue + ' ms');
   var firstArrivalTime = 0;
 }
 
 if (secondValue == p1BurstTime) {
-  $('#secondProcess').text('P1');
+  $('#secondProcess').text('P1 - ' + secondValue + ' ms');
   secondArrivalTime = firstArrivalTime + Number(firstValue);
 } else if (secondValue == p2BurstTime) {
-  $('#secondProcess').text('P2');
+  $('#secondProcess').text('P2 - ' + secondValue + ' ms');
   secondArrivalTime = firstArrivalTime + Number(firstValue);
 } else if (secondValue == p3BurstTime) {
-  $('#secondProcess').text('P3');
+  $('#secondProcess').text('P3 - ' + secondValue + ' ms');
   secondArrivalTime = firstArrivalTime + Number(firstValue);
 } else {
-  $('#secondProcess').text('P4');
+  $('#secondProcess').text('P4 - ' + secondValue + ' ms');
   secondArrivalTime = firstArrivalTime + Number(firstValue);
 }
 
 
 if (thirdValue == p1BurstTime) {
-  $('#thirdProcess').text('P1');
+  $('#thirdProcess').text('P1 - ' + thirdValue + ' ms');
   thirdArrivalTime = secondArrivalTime + Number(secondValue);
 } else if (thirdValue == p2BurstTime) {
-  $('#thirdProcess').text('P2');
+  $('#thirdProcess').text('P2 - ' + thirdValue + ' ms');
   thirdArrivalTime = secondArrivalTime + Number(secondValue);
 } else if (thirdValue == p3BurstTime) {
-  $('#thirdProcess').text('P3');
+  $('#thirdProcess').text('P3 - ' + thirdValue + ' ms');
   thirdArrivalTime = secondArrivalTime + Number(secondValue);
 } else {
-  $('#thirdProcess').text('P4');
+  $('#thirdProcess').text('P4 - ' + thirdValue + ' ms');
   thirdArrivalTime = secondArrivalTime + Number(secondValue);
 }
 
 
 if (fourthValue == p1BurstTime) {
-  $('#fourthProcess').text('P1');
+  $('#fourthProcess').text('P1 - ' + fourthValue + ' ms');
   fourthArrivalTime = thirdArrivalTime + Number(thirdValue);
 } else if (fourthValue == p2BurstTime) {
-  $('#fourthProcess').text('P2');
+  $('#fourthProcess').text('P2 - ' + fourthValue + ' ms');
   fourthArrivalTime = thirdArrivalTime + Number(thirdValue);
 } else if (fourthValue == p3BurstTime) {
-  $('#fourthProcess').text('P3');
+  $('#fourthProcess').text('P3 - ' + fourthValue + ' ms');
   fourthArrivalTime = thirdArrivalTime + Number(thirdValue);
 } else {
-  $('#fourthProcess').text('P4');
+  $('#fourthProcess').text('P4 - ' + fourthValue + ' ms');
   fourthArrivalTime = thirdArrivalTime + Number(thirdValue);
 }
 
