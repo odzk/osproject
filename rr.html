@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>Sample Algorithms</title>
+  </head>
+  <body>
+
+<div class="container-fluid mt-5">
+<div class="row">
+<div class="col-sm-4 mt-5">
+<div class="col-md-12 text-center mt-3 shadow p-3">
+  <a href="index.html" class="btn btn-info btn-sm">FCFS Algorithm</a>
+  <a href="index.html" class="btn btn-success btn-sm">SPF Algorithm</a>
+</div>
+
+<div class="col-md-12 text-center mt-3 shadow p-3">
+  <button class="btn btn-danger btn-sm">SRTF Algorithm</button>
+  <button class="btn btn-primary btn-sm">RR Algorithm</button>
+</div>
+
+<div class="col-md-12 text-center mt-3 shadow p-3">
+  <button class="btn btn-secondary btn-sm">Priority Scheduling Algorithm</button>
+</div>
+
+</div>
+
+<div class="col-sm-6">
+  <div class="card mt-3 shadow">
+  <div class="card-header">
+    RR Input Process Time Quantum Time: <input type="text" class="form-control-sm" id="quantum" value="5" readonly="">(ms) <button class="btn btn-sm btn-info float-right" data-toggle="modal" data-target="#about">About</button>
+   </div>
+
+<div class="card-body">
+<table class="table table-sm table-bordered table-hover">
+
+<tr class="d-flex text-center">
+  <th class="col-4"></th>
+  <th class="col-4">Burst Time (ms)</th>
+  <th class="col-4">Arrival Time (ms)</th>
+<tr>
+<tr class="d-flex text-center">
+  <td class="col-4 text-center">(P1)</td>
+  <td class="col-4"><input type='text' class='form-control form-control-sm' id="p1_bt" value="21" readonly=""></td>
+  <td class="col-4"><input type='text' class='form-control form-control-sm' id="p1_at" value="0" readonly=""></td>
+</tr>
+
+<tr class="d-flex text-center">
+  <td class="col-4 text-center">(P2)</td>
+  <td class="col-4"><input type='text' class='form-control form-control-sm' id="p2_bt" value="3" readonly=""></td>
+  <td class="col-4"><input type='text' class='form-control form-control-sm' id="p2_at" value="1" readonly=""></td>
+</tr>
+
+<tr class="d-flex text-center">
+  <td class="col-4 text-center">(P3)</td>
+  <td class="col-4"><input type='text' class='form-control form-control-sm' id="p3_bt" value="6" readonly=""></td>
+  <td class="col-4"><input type='text' class='form-control form-control-sm' id="p3_at" value="2" readonly=""></td>
+</tr>
+
+<tr class="d-flex text-center">
+  <td class="col-4 text-center">(P4)</td>
+  <td class="col-4"><input type='text' class='form-control form-control-sm' id="p4_bt" value="2" readonly=""></td>
+  <td class="col-4"><input type='text' class='form-control form-control-sm' id="p4_at" value="3" readonly=""></td>
+</tr>
+</table>
+
+<div class="col-md-12 text-center">
+  <button class="btn btn-info btn-sm" onclick="RR();">RR Algorithm</button>
+<!--   <button class="btn btn-success btn-sm" onclick="SPF()">SPF Algorithm</button>
+ --></div>
+</div>
+
+  <div class="card mt-4 shadow">
+  <div class="card-header">
+    Output Executing: <span id="totalWatingTime"></span>
+   </div>
+  <div class="card-body">
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%; display: none;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" id="p1Progress"><span id="firstProcess"></span></div>
+    <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%; display: none;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" id="p2Progress"><span id="secondProcess"></span></div>
+    <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%; display: none;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" id="p3Progress"><span id="thirdProcess"></span></div>
+    <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%; display: none;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" id="p4Progress"><span id="fourthProcess"></span></div>
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%; display: none;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" id="remaining1Progress"><span id="remaining1"></span></div>
+    <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%; display: none;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" id="remaining2Progress"><span id="remaining2"></span></div>
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 25%; display: none;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" id="remaining3Progress"><span id="remaining3"></span></div>
+</div>
+  </div>
+</div>
+</div><!-- end of container -->
+</div>  
+  </body>  
+
+<!-- Modal -->
+<div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="about" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="about">About</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+      <p>OS Project Algorithm Sample v0.9</p>
+      <p>Submitted by: Odysseus Ambut</p>
+      <p>Submiited to: Godwin Monserate</p>
+      <p>Github: https://github.com/odzk/</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+//Get the Values from Input
+
+//First Come First Serve Algorithm
+function RR() {
+
+var quantumTime = $('#quantum').val();
+
+var p1BurstTime = $('#p1_bt').val();
+var p2BurstTime = $('#p2_bt').val();
+var p3BurstTime = $('#p3_bt').val();
+var p4BurstTime = $('#p4_bt').val();
+
+var p1ArrivalTime = $('#p1_at').val();
+var p2ArrivalTime = $('#p2_at').val();
+var p3ArrivalTime = $('#p3_at').val();
+var p4ArrivalTime = $('#p4_at').val();
+
+//create object pairs for each processes
+
+var allProcessObj = { 
+      p1 : { name: 'P1', burst_time: p1BurstTime, arrival_time : p1ArrivalTime }, 
+      p2 : { name: 'P2', burst_time: p2BurstTime, arrival_time : p2ArrivalTime },
+      p3 : { name: 'P3', burst_time: p3BurstTime, arrival_time : p3ArrivalTime },
+      p4 : { name: 'P4', burst_time: p4BurstTime, arrival_time : p4ArrivalTime },
+    };
+
+//get the first process
+
+var getTotalBurstTime = Number(allProcessObj.p1.burst_time) + Number(allProcessObj.p2.burst_time) + Number(allProcessObj.p3.burst_time) + Number(allProcessObj.p4.burst_time);
+
+console.log(getTotalBurstTime);
+var p1BurstTimeRemaining = 0
+var p2BurstTimeRemaining = 0
+var p3BurstTimeRemaining = 0
+var p4BurstTimeRemaining = 0
+
+if(Number(allProcessObj.p1.burst_time) < Number(quantumTime)) {
+for (var i = 1; i <= Number(allProcessObj.p1.burst_time); i++) {
+   $('#firstProcess').text('P1 - ' + i + ' ms' );
+   $('#p1Progress').attr('aria-valuenow', ((p1BurstTimeRemaining/getTotalBurstTime)*100)).css( {'width' :  ((p1BurstTimeRemaining/getTotalBurstTime)*100) + '%', 'display' : 'block' } );
+   var p1BurstTimeRemaining = (Number(allProcessObj.p1.burst_time) - i);
+   var p1Progress = (Number(allProcessObj.p1.burst_time - p1BurstTimeRemaining));
+  }
+} else {
+for (var i = 1; i <= Number(quantumTime); i++) {
+   $('#firstProcess').text('P1 - ' + i + ' ms' );
+   $('#p1Progress').attr('aria-valuenow', ((p1Progress/getTotalBurstTime)*100)).css( {'width' : ((p1Progress/getTotalBurstTime)*100) + '%', 'display' : 'block' } );
+   var p1BurstTimeRemaining = (Number(allProcessObj.p1.burst_time) - i);
+   var p1Progress = (Number(allProcessObj.p1.burst_time - p1BurstTimeRemaining));
+  } 
+}
+
+if(Number(allProcessObj.p2.burst_time) < Number(quantumTime)) {
+for (var i = 1; i <= Number(allProcessObj.p2.burst_time); i++) {
+   $('#secondProcess').text('P2 - ' + i + ' ms' );
+   $('#p2Progress').attr('aria-valuenow', ((p2Progress/getTotalBurstTime)*100)).css( {'width' : ((p2Progress/getTotalBurstTime)*100) + '%', 'display' : 'block' } );
+   var p2BurstTimeRemaining = (Number(allProcessObj.p2.burst_time) - i);
+   var p2Progress = (Number(allProcessObj.p2.burst_time - p2BurstTimeRemaining));
+  }
+} else {
+for (var i = 1; i <= Number(quantumTime); i++) {
+   $('#secondProcess').text('P2 - ' + i + ' ms' );
+   $('#p2Progress').attr('aria-valuenow', ((p2Progress/getTotalBurstTime)*100)).css( {'width' : ((p2Progress/getTotalBurstTime)*100) + '%', 'display' : 'block' } );
+   var p2BurstTimeRemaining = (Number(allProcessObj.p2.burst_time) - i);
+   var p2Progress = (Number(allProcessObj.p2.burst_time - p2BurstTimeRemaining));
+  }
+}
+
+// check first process if there is still burst time
+p1Progress_1 = 0;
+if (p1BurstTimeRemaining > 0 ) {
+if(Number(p1BurstTimeRemaining) < Number(quantumTime)) {
+for (var i = 1; i <= Number(p1BurstTimeRemaining); i++) {
+   $('#thirdProcess').text('P1 - ' + i + ' ms' );
+   $('#p3Progress').attr('aria-valuenow', ((p1Progress_1/getTotalBurstTime)*100)).css( {'width' : ((p1Progress_1/getTotalBurstTime)*100) + '%', 'display' : 'block' } );
+   var p1BurstTimeRemaining_r1 = (Number(p1BurstTimeRemaining) - i);
+   var p1Progress_r1 = (Number(p1BurstTimeRemaining - p1BurstTimeRemaining_r1));
+  }
+} else {
+for (var i = 1; i <= Number(quantumTime); i++) {
+   $('#thirdProcess').text('P1 - ' + i + ' ms' );
+   $('#p3Progress').attr('aria-valuenow', ((p1Progress_r1/getTotalBurstTime)*100)).css( {'width' : ((p1Progress_1/getTotalBurstTime)*100) + '%', 'display' : 'block' } );
+   var p1BurstTimeRemaining_r1 = (Number(p1BurstTimeRemaining) - i);
+   var p1Progress_r1 = (Number(p1BurstTimeRemaining - p1BurstTimeRemaining_r1));
+  }
+}
+} else {
+if(Number(allProcessObj.p3.burst_time) < Number(quantumTime)) {
+for (var i = 1; i <= Number(allProcessObj.p3.burst_time); i++) {
+   $('#thirdProcess').text('P3 - ' + i + ' ms' );
+   $('#p3Progress').attr('aria-valuenow', ((p3Progress/getTotalBurstTime)*100)).css( {'width' : ((p3Progress/getTotalBurstTime)*100) + '%', 'display' : 'block' } );
+   var p3BurstTimeRemaining = (Number(allProcessObj.p3.burst_time) - i);
+   var p3Progress = (Number(allProcessObj.p3.burst_time - p3BurstTimeRemaining));
+  }
+} else {
+for (var i = 1; i <= Number(quantumTime); i++) {
+   $('#thirdProcess').text('P3 - ' + i + ' ms' );
+   $('#p3Progress').attr('aria-valuenow', ((p3Progress/getTotalBurstTime)*100)).css( {'width' : ((p3Progress/getTotalBurstTime)*100) + '%', 'display' : 'block' } );
+   var p3BurstTimeRemaining = (Number(allProcessObj.p3.burst_time) - i);
+   var p3Progress = (Number(allProcessObj.p3.burst_time - p3BurstTimeRemaining));
+  }
+ }
+}
+
+// execute third process
+
+if(Number(allProcessObj.p3.burst_time) < Number(quantumTime)) {
+for (var i = 1; i <= Number(allProcessObj.p3.burst_time); i++) {
+   $('#fourthProcess').text('P3 - ' + i + ' ms' );
+   $('#p4Progress').attr('aria-valuenow', ((p3Progress/getTotalBurstTime)*100)).css( {'width' : ((p3Progress/getTotalBurstTime)*100) + '%', 'display' : 'block' } );
+   var p3BurstTimeRemaining = (Number(allProcessObj.p3.burst_time) - i);
+   var p3Progress = (Number(allProcessObj.p3.burst_time - p3BurstTimeRemaining));
+  }
+} else {
+for (var i = 1; i <= Number(quantumTime); i++) {
+   $('#fourthProcess').text('P3 - ' + i + ' ms' );
+   $('#p4Progress').attr('aria-valuenow', ((p3Progress/getTotalBurstTime)*100)).css( {'width' : ((p3Progress/getTotalBurstTime)*100) + '%', 'display' : 'block' } );
+   var p3BurstTimeRemaining = (Number(allProcessObj.p3.burst_time) - i);
+   var p3Progress = (Number(allProcessObj.p3.burst_time - p3BurstTimeRemaining));
+  }
+ }
+
+if(Number(allProcessObj.p4.burst_time) < Number(quantumTime)) {
+for (var i = 1; i <= Number(allProcessObj.p4.burst_time); i++) {
+   $('#remaining1').text('P4 - ' + i + ' ms' );
+   $('#remaining1Progress').attr('aria-valuenow', ((p4BurstTimeRemaining/getTotalBurstTime)*100)).css( {'width' : ((p4BurstTimeRemaining/getTotalBurstTime)*100) + '%', 'display' : 'block' } );
+   var p4BurstTimeRemaining = (Number(allProcessObj.p4.burst_time) - i);
+   var p4Progress = (Number(allProcessObj.p4.burst_time - p4BurstTimeRemaining));
+  }
+} else {
+for (var i = 1; i <= Number(quantumTime); i++) {
+ $('#remaining1').text('P4 - ' + i + ' ms' );
+ $('#remaining1Progress').attr('aria-valuenow', ((p4BurstTimeRemaining/getTotalBurstTime)*100)).css( {'width' : ((p4BurstTimeRemaining/getTotalBurstTime)*100) + '%', 'display' : 'block' } );
+ var p4BurstTimeRemaining = (Number(allProcessObj.p4.burst_time) - i);
+ var p4Progress = (Number(allProcessObj.p4.burst_time - p4BurstTimeRemaining));
+  }
+}
+
+
+console.log(p3BurstTimeRemaining);
+// check Process 3 Remaining Time
+
+if (p3BurstTimeRemaining > 0 ) {
+  
+if(Number(p3BurstTimeRemaining) < Number(quantumTime)) {
+
+for (var i = 1; i <= Number(p3BurstTimeRemaining); i++) {
+   $('#remaining2').text('P3 - ' + i + ' ms' );
+   $('#remaining2Progress').attr('aria-valuenow', ((p3BurstTimeRemaining/getTotalBurstTime)*100)).css( {'width' : ((p3BurstTimeRemaining/getTotalBurstTime)*100) + '%', 'display' : 'block' } );
+   var p3BurstTimeRemaining_r3 = (Number(p3BurstTimeRemaining) - i);
+   var p3Progress_r3 = (Number(p3BurstTimeRemaining - p3BurstTimeRemaining_r3));
+  }
+} else {
+for (var i = 1; i <= Number(quantumTime); i++) {
+   $('#remaining2').text('P3 - ' + i + ' ms' );
+   $('#remaining2Progress').attr('aria-valuenow', ((p3BurstTimeRemaining/getTotalBurstTime)*100)).css( {'width' : ((p3BurstTimeRemaining/getTotalBurstTime)*100) + '%', 'display' : 'block' } );
+   var p3BurstTimeRemaining_r3 = (Number(p3BurstTimeRemaining) - i);
+   var p3Progress_r3 = (Number(p3BurstTimeRemaining - p3BurstTimeRemaining_r3));
+  }
+}
+} 
+
+for (var i = 1; i <= Number(p1BurstTimeRemaining); i++) {
+   $('#remaining3').text('P1 - ' + i + ' ms' );
+   $('#remaining3Progress').attr('aria-valuenow', ((p1Progress_r1/getTotalBurstTime)*100)).css( {'width' : 64 + '%', 'display' : 'block' } );
+   var p1BurstTimeRemaining_r1 = (Number(p1BurstTimeRemaining) - i);
+   var p1Progress_r1 = (Number(p1BurstTimeRemaining - p1BurstTimeRemaining_r1));
+  }
+
+}
+function SPF() {
+
+//get all values and put into array
+
+var p1BurstTime = $('#p1').val();
+var p2BurstTime = $('#p2').val();
+var p3BurstTime = $('#p3').val();
+var p4BurstTime = $('#p4').val();
+
+for (var i = 0; i <= firstBar; i++) {
+  $('#p1Progress').attr('aria-valuenow', i).css( {'width' : i + '%', 'display' : 'block' } );
+} 
+
+
+for (var i = 0; i <= secondBar; i++) {
+  $('#p2Progress').attr('aria-valuenow', i).css( { 'width' : i + '%', 'display' : 'block' } );
+} 
+
+
+for (var i = 0; i <= thirdBar; i++) {
+  $('#p3Progress').attr('aria-valuenow', i).css( { 'width' : i + '%', 'display' : 'block' } );
+}
+
+for (var i = 0; i <= fourthBar; i++) {
+$('#p4Progress').attr('aria-valuenow', i).css( {'width' : i + '%', 'display' : 'block' } );
+}
+
+allValues = new Array();
+
+var allValues = [p1BurstTime, p2BurstTime, p3BurstTime, p4BurstTime];
+var sortValues = allValues.sort((function (a, b) {  return a - b;  }));
+var firstValue = sortValues[0];
+var secondValue = sortValues[1];
+var thirdValue = sortValues[2];
+var fourthValue = sortValues[3];
+
+//compare the values in Process
+
+//solve for arrival time:
+firstArrivalTime = 0;
+secondArrivalTime = 0;
+thirdArrivalTime = 0;
+fourthArrivalTime = 0;
+
+if (firstValue == p1BurstTime) {
+  $('#firstProcess').text('P1');
+  var firstArrivalTime = 0;
+} else if (firstValue == p2BurstTime) {
+  $('#firstProcess').text('P2');
+  var firstArrivalTime = 0;
+} else if (firstValue == p3BurstTime) {
+  $('#firstProcess').text('P3');
+  var firstArrivalTime = 0;
+} else {
+  $('#firstProcess').text('P4');
+  var firstArrivalTime = 0;
+}
+
+if (secondValue == p1BurstTime) {
+  $('#secondProcess').text('P1');
+  secondArrivalTime = firstArrivalTime + Number(firstValue);
+} else if (secondValue == p2BurstTime) {
+  $('#secondProcess').text('P2');
+  secondArrivalTime = firstArrivalTime + Number(firstValue);
+} else if (secondValue == p3BurstTime) {
+  $('#secondProcess').text('P3');
+  secondArrivalTime = firstArrivalTime + Number(firstValue);
+} else {
+  $('#secondProcess').text('P4');
+  secondArrivalTime = firstArrivalTime + Number(firstValue);
+}
+
+
+if (thirdValue == p1BurstTime) {
+  $('#thirdProcess').text('P1');
+  thirdArrivalTime = secondArrivalTime + Number(secondValue);
+} else if (thirdValue == p2BurstTime) {
+  $('#thirdProcess').text('P2');
+  thirdArrivalTime = secondArrivalTime + Number(secondValue);
+} else if (thirdValue == p3BurstTime) {
+  $('#thirdProcess').text('P3');
+  thirdArrivalTime = secondArrivalTime + Number(secondValue);
+} else {
+  $('#thirdProcess').text('P4');
+  thirdArrivalTime = secondArrivalTime + Number(secondValue);
+}
+
+
+if (fourthValue == p1BurstTime) {
+  $('#fourthProcess').text('P1');
+  fourthArrivalTime = thirdArrivalTime + Number(thirdValue);
+} else if (fourthValue == p2BurstTime) {
+  $('#fourthProcess').text('P2');
+  fourthArrivalTime = thirdArrivalTime + Number(thirdValue);
+} else if (fourthValue == p3BurstTime) {
+  $('#fourthProcess').text('P3');
+  fourthArrivalTime = thirdArrivalTime + Number(thirdValue);
+} else {
+  $('#fourthProcess').text('P4');
+  fourthArrivalTime = thirdArrivalTime + Number(thirdValue);
+}
+
+var getTotalBurstTime = Number(firstValue) + Number(secondValue) + Number(thirdValue) + Number(fourthValue);
+var firstBar = (Number(firstValue) / Number(getTotalBurstTime) * 100);
+var secondBar = (Number(secondValue) / Number(getTotalBurstTime) * 100);
+var thirdBar = (Number(thirdValue) / Number(getTotalBurstTime) * 100);
+var fourthBar = (Number(fourthValue) / Number(getTotalBurstTime) * 100);
+
+for (var i = 0; i <= firstBar; i++) {
+  $('#p1Progress').attr('aria-valuenow', i).css( {'width' : i + '%', 'display' : 'block' } );
+} 
+
+
+for (var i = 0; i <= secondBar; i++) {
+  $('#p2Progress').attr('aria-valuenow', i).css( { 'width' : i + '%', 'display' : 'block' } );
+} 
+
+
+for (var i = 0; i <= thirdBar; i++) {
+  $('#p3Progress').attr('aria-valuenow', i).css( { 'width' : i + '%', 'display' : 'block' } );
+}
+
+for (var i = 0; i <= fourthBar; i++) {
+$('#p4Progress').attr('aria-valuenow', i).css( {'width' : i + '%', 'display' : 'block' } );
+}
+
+console.log(firstArrivalTime);
+console.log(secondArrivalTime);
+console.log(thirdArrivalTime);
+console.log(fourthArrivalTime);
+var ave_waiting_time = (firstArrivalTime + secondArrivalTime + thirdArrivalTime + fourthArrivalTime) / 4;
+
+$('#totalWatingTime').text(ave_waiting_time + ' ms');
+
+}
+
+</script>
+
+</html>
